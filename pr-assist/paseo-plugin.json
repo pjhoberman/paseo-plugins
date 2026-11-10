@@ -1,0 +1,13 @@
+{
+  "id": "pr-assist",
+  "name": "PR assist",
+  "description": "Adds composer buttons to review a branch with a different model, resolve merge conflicts, and fix failing GitHub Actions checks.",
+  "media": [
+    "assets/composer-buttons.png",
+    "assets/fix-ci.png",
+    "assets/reviewer-settings.png"
+  ],
+  "requirements": {
+    "paseo": ">=0.15.3"
+  }
+}
