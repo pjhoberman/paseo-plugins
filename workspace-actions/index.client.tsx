@@ -3,10 +3,9 @@ import {
   type PluginClientContext,
   openExternalUrl,
 } from "@getpaseo/plugin/client";
-import type { PaseoApi } from "@getpaseo/client";
 import { AfterArchiveScreen } from "./client/after-archive-screen";
 import { makeConfirmArchive } from "./client/confirm-archive";
-import { type Workspace, loadWorkspace, pullRequestUrl, unsavedWork } from "./client/workspace";
+import { type PaseoApi, type Workspace, loadWorkspace, pullRequestUrl, unsavedWork } from "./client/workspace";
 
 interface Buttons {
   pr: PluginButtonRegistration;

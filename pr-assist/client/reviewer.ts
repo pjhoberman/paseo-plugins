@@ -1,4 +1,6 @@
-import type { PaseoAgentHandle, PaseoApi } from "@getpaseo/client";
+import type { PaseoApi } from "./model";
+
+type PaseoAgentHandle = ReturnType<PaseoApi["agents"]["ref"]>;
 
 const LABELS: Record<string, string> = { claude: "Claude", codex: "Codex", opencode: "OpenCode" };
 

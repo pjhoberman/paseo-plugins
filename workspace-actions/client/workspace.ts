@@ -1,4 +1,7 @@
-import type { PaseoApi } from "@getpaseo/client";
+import type { usePaseo } from "@getpaseo/plugin/client";
+
+/** The SDK client type, taken from the plugin package because `@getpaseo/client` is not a host module. */
+export type PaseoApi = ReturnType<typeof usePaseo>;
 
 export type Workspace = Awaited<ReturnType<PaseoApi["workspaces"]["list"]>>["entries"][number];
 
