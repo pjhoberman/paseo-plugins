@@ -2,6 +2,7 @@
   "id": "workspace-actions",
   "name": "Workspace actions",
   "description": "Adds one-click archive and open pull request buttons to the workspace header.",
+  "icon": "assets/icon.png",
   "media": [
     "assets/open-pr-button.png",
     "assets/archive-confirm.png"

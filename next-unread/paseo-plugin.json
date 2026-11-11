@@ -2,6 +2,7 @@
   "id": "next-unread",
   "name": "Next unread",
   "description": "Adds a Next unread button above the composer that jumps to the agent waiting longest for your attention.",
+  "icon": "assets/icon.png",
   "media": [
     "assets/composer-button.png"
   ],
