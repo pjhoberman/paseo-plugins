@@ -48,7 +48,7 @@ export default function contribute(client: PluginClientContext) {
   });
 
   const reviewerFor = (agent: Agent) =>
-    resolveReviewer(providerOf(agent), settingsStore.get(), available);
+    resolveReviewer(providerOf(agent), settingsStore.get().reviewers, available);
 
   async function startReview(agentId: string) {
     const agent = agents.get(agentId);
@@ -56,10 +56,11 @@ export default function contribute(client: PluginClientContext) {
     if (!agent || !workspace) throw new Error("This agent's workspace is not loaded yet.");
     const spec = reviewerFor(agent);
     if (!spec) return client.openSettings(SETTINGS_SCREEN);
-    const label = providerLabel(reviewerProvider(spec));
+    const provider = reviewerProvider(spec);
+    const modeId = settingsStore.get().reviewerModes[provider];
     const reviewer = await paseo.workspaces.ref(workspace.id).agents.create({
-      config: { provider: await toProviderModel(paseo, spec) },
-      title: `Adversarial review (${label})`,
+      config: { provider: await toProviderModel(paseo, spec), ...(modeId ? { modeId } : {}) },
+      title: `Adversarial review (${providerLabel(provider)})`,
     });
     client.openScreen({ screenId: JUMP_SCREEN, params: { agentId: reviewer.id } });
     const skill = await detectReviewSkill(reviewer);
@@ -161,7 +162,7 @@ export default function contribute(client: PluginClientContext) {
 
   client
     .rpc(getSettingsRpc, {})
-    .then(({ reviewers }) => settingsStore.set(reviewers))
+    .then((settings) => settingsStore.set(settings))
     .catch(fail("loading settings"));
   availableProviders(paseo)
     .then((providers) => {

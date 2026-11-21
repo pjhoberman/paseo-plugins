@@ -1,12 +1,14 @@
-type Listener = (reviewers: Record<string, string>) => void;
+import type { ReviewerSettings } from "../shared/contracts";
 
-let reviewers: Record<string, string> = {};
+type Listener = (settings: ReviewerSettings) => void;
+
+let settings: ReviewerSettings = { reviewers: {}, reviewerModes: {} };
 const listeners = new Set<Listener>();
 
 export const settingsStore = {
-  get: () => reviewers,
-  set(next: Record<string, string>) {
-    reviewers = next;
+  get: () => settings,
+  set(next: ReviewerSettings) {
+    settings = next;
     for (const listener of listeners) listener(next);
   },
   subscribe(listener: Listener) {
