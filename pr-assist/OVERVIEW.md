@@ -13,6 +13,7 @@ Resolve conflicts and Fix CI are disabled while the agent is working, so they ne
 Requires Paseo 0.15.3 or later.
 
 - Review needs a second provider enabled on the host. If the default reviewer is unavailable, the button reads "Review…" and opens the plugin's settings. There you can choose a reviewer for each provider, either a provider such as `claude` or a specific model such as `opencode/google-vertex/gemini-3.1-pro-preview`. Some providers offer models from several vendors, so choose a specific model if you want a different model family.
+- The same settings set the permission mode each reviewer provider starts in, such as Bypass for Claude or Full Access for Codex. Default uses the mode a new agent gets on that provider.
 - Fix CI needs the GitHub CLI (`gh`) installed and signed in on the daemon host, with access to the repository.
 
 ## Data and permissions
@@ -20,7 +21,8 @@ Requires Paseo 0.15.3 or later.
 - The plugin runs `gh run view --log-failed` on the daemon host, using your existing `gh` sign-in, to read logs of failed jobs.
 - Those logs, the check names and links, and the branch names are put into prompts. Prompts go to the agent's provider like any message you type, so CI logs may contain anything your jobs print.
 - Resolve conflicts and Fix CI ask the agent to commit and push to the pull request branch. The agent's usual permission settings apply.
-- Reviewer choices are saved in the plugin's settings on the host. Nothing else is stored.
+- The review agent starts in the reviewer permission mode chosen in the settings, or the provider's default. It is told not to change files, but a permissive mode such as Bypass lets it run commands without asking.
+- Reviewer choices and reviewer permission modes are saved in the plugin's settings on the host. Nothing else is stored.
 
 ## Limitations
 
